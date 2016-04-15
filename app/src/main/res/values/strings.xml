@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="nameTest">Test 1</string>
+    <string name="nameHistory">Edgar Allan Poe</string>
+    <string name="error_intro">Error al introducir </string>
+    <string name="error_blank_username"> Nombre</string>
+    <string name="error_blank_password"> Password</string>
+    <string name="regUser">Registro Nuevo Usuario</string>
+    <string name="userPassWrong">Usuario o Contraseña incorrectos</string>
+    <string name="diferentPass">Las dos contraseñas no coinciden</string>
+    <string name="userPassOkey">Usuario correcto</string>
+    <string name="registroCorrecto">Registro de usuario correcto</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
