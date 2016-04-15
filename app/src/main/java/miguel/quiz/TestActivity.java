@@ -1,9 +1,9 @@
 package miguel.quiz;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,17 +15,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import dialogs.SimpleDialog;
 import question.FillingGaps;
 import question.MultipleChoice;
 import question.Question;
@@ -221,7 +224,6 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
-
     public class MultipleChoiceFragment extends Fragment {
 
         private TextView tip;
@@ -284,11 +286,32 @@ public class TestActivity extends AppCompatActivity {
         private Button buttonNext;
         private ArrayList<String> respuestasSeleccionadas;
 
-        public FillingGapsFragment(){
+        public FillingGapsFragment() {
 
         }
 
-        @Override
+
+        public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_filling_gaps, container, false);
+            tip = (TextView)rootView.findViewById(R.id.tipo_fill_gaps);
+            tip.setText("Tipo: FILLING GAPS");
+            buttonNext = (Button) rootView.findViewById(R.id.btn_fill_gaps);
+            fillingGaps = (FillingGaps) question;
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_edit_filling, fillingGaps.getList());
+
+            //Asociamos el adaptador a la vista.
+            ListView lv = (ListView) rootView.findViewById(R.id.listViewFill);
+            lv.setAdapter(adapter);
+            return rootView;
+        }
+
+
+    }
+
+
+    /*    @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.question_filling_gaps, container, false);
@@ -329,6 +352,10 @@ public class TestActivity extends AppCompatActivity {
         }
 
     }
+
+    */
+
+
     public class SimpleDialog extends DialogFragment {
 
         private String correct;
@@ -340,7 +367,6 @@ public class TestActivity extends AppCompatActivity {
 
         }
 
-        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return createSimpleDialog();
@@ -366,6 +392,7 @@ public class TestActivity extends AppCompatActivity {
             return builder.create();
         }
     }
+
 
 }
 // TODO !!!!!!!!

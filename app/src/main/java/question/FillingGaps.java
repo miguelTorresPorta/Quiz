@@ -16,14 +16,13 @@ public class FillingGaps extends Question{
     //ArrayList<String> respuestas;
     private ArrayList<String> respuestas;
     private ArrayList<String> tit;
-    private Integer numRespuestas;
+    private ArrayList<String> list;
 
 
     public FillingGaps(String tituloPregunta, String tipo, String respuestas) {
         super(tituloPregunta, tipo);
         this.respuestas = new ArrayList<String>();
         this.tit = new ArrayList<String>();
-        this.numRespuestas = 0;
 
         respuestas = respuestas.trim();
         //respuestas.indexOf(":");
@@ -32,7 +31,6 @@ public class FillingGaps extends Question{
         int lenghtListaRespuetas = listaRespuestas.length;
         for (int i = 0; i < lenghtListaRespuetas; i++){
             this.respuestas.add(listaRespuestas[i].trim());
-            this.numRespuestas++;
         }
         String[] listTitulo = tituloPregunta.split("_");
 
@@ -43,7 +41,17 @@ public class FillingGaps extends Question{
             }
         }
 
-    }
+        ArrayList<String> ll = new ArrayList<>();
+        for (int i = 0; i < this.tit.size() || i < this.respuestas.size(); i++){
+            if (i < this.tit.size())
+                ll.add(this.tit.get(i));
+            if (i < this.respuestas.size())
+                ll.add("______________");
+                //ll.add(this.tit.get(i));
+        }
+        this.list = ll;
+        }
+
 
     public ArrayList<String> getRespuestas(){
         return this.respuestas;
@@ -54,6 +62,7 @@ public class FillingGaps extends Question{
     }
 
 
-
-
+    public ArrayList<String> getList() {
+        return this.list;
+    }
 }
