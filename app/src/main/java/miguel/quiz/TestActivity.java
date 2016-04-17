@@ -8,6 +8,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
@@ -86,7 +87,7 @@ public class TestActivity extends AppCompatActivity {
 
         question = test.getQuestionByPosition(position);
 
-        switch (question.getTipo()){
+        switch (question.getTipo()) {
             case "TRUE":
                 TrueFalseFragment tf = new TrueFalseFragment();
                 fragmentTransaction.add(R.id.contain, tf, "editor")
@@ -112,7 +113,7 @@ public class TestActivity extends AppCompatActivity {
         // Open the new fragment
         position++;
 
-        if(position < numQuestions) {
+        if (position < numQuestions) {
             FragmentManager fragmentManager = getSupportFragmentManager();
 
             FragmentTransaction fragmentTransaction = fragmentManager
@@ -138,7 +139,7 @@ public class TestActivity extends AppCompatActivity {
                             .commit();
                     break;
             }
-        }else{
+        } else {
             finish();
         }
 
@@ -153,7 +154,7 @@ public class TestActivity extends AppCompatActivity {
         private RadioButton rTrue;
         private TrueFalse trueFalse;
 
-        public TrueFalseFragment(){
+        public TrueFalseFragment() {
 
         }
 
@@ -165,18 +166,18 @@ public class TestActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            final ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.question_true_false, container, false);
+            final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_true_false, container, false);
 
 
             trueFalse = (TrueFalse) question;
             final boolean verdadero = trueFalse.isCorrecto();
             final String respuesta = trueFalse.getRespuesta();
 
-            tip = (TextView)rootView.findViewById(R.id.txtTipo);
-            titu = (TextView)rootView.findViewById(R.id.txtTit);
-            buttonNext = (Button)rootView.findViewById(R.id.btnSiguienteTrueFalse);
-            rFalse = (RadioButton)rootView.findViewById(R.id.radioButtonFalse);
-            rTrue = (RadioButton)rootView.findViewById(R.id.radioButtonTrue);
+            tip = (TextView) rootView.findViewById(R.id.txtTipo);
+            titu = (TextView) rootView.findViewById(R.id.txtTit);
+            buttonNext = (Button) rootView.findViewById(R.id.btnSiguienteTrueFalse);
+            rFalse = (RadioButton) rootView.findViewById(R.id.radioButtonFalse);
+            rTrue = (RadioButton) rootView.findViewById(R.id.radioButtonTrue);
 
 
             tip.setText("Tipo: TRUE / FALSE");
@@ -187,23 +188,23 @@ public class TestActivity extends AppCompatActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (rTrue.isChecked()){
+                            if (rTrue.isChecked()) {
                                 if (verdadero) {
                                     // En algún lugar de tu actividad
                                     new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
                                     //Toast.makeText(getApplicationContext(), "CORRECTO!!", Toast.LENGTH_SHORT).show();
-                                }else {
+                                } else {
                                     // En algún lugar de tu actividad
                                     new SimpleDialog("Incorrecto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
                                     //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
                                 }
 
-                            }else if(rFalse.isChecked()){
+                            } else if (rFalse.isChecked()) {
                                 if (verdadero) {
                                     // En algún lugar de tu actividad
                                     new SimpleDialog("Incorrecto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
                                     //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
-                                }else {
+                                } else {
                                     // En algún lugar de tu actividad
                                     new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
                                     //Toast.makeText(getApplicationContext(), "CORRECTO!!", Toast.LENGTH_SHORT).show();
@@ -218,9 +219,11 @@ public class TestActivity extends AppCompatActivity {
             );
 
 
-
             return rootView;
         }
+
+
+
 
     }
 
@@ -234,21 +237,21 @@ public class TestActivity extends AppCompatActivity {
         private CheckBox checkBox3;
         private MultipleChoice multipleChoice;
 
-        public MultipleChoiceFragment(){
+        public MultipleChoiceFragment() {
 
         }
 
         @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.question_multiple_choice, container, false);
+            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_multiple_choice, container, false);
 
-            tip = (TextView)rootView.findViewById(R.id.tipo_mult_choice);
-            titu = (TextView)rootView.findViewById(R.id.titulo_mult_choice);
-            buttonNext = (Button)rootView.findViewById(R.id.sig_mult_choice);
-            checkBox1 = (CheckBox)rootView.findViewById(R.id.checkBoxMult1);
-            checkBox2 = (CheckBox)rootView.findViewById(R.id.checkBoxMult2);
-            checkBox3 = (CheckBox)rootView.findViewById(R.id.checkBoxMult3);
+            tip = (TextView) rootView.findViewById(R.id.tipo_mult_choice);
+            titu = (TextView) rootView.findViewById(R.id.titulo_mult_choice);
+            buttonNext = (Button) rootView.findViewById(R.id.sig_mult_choice);
+            checkBox1 = (CheckBox) rootView.findViewById(R.id.checkBoxMult1);
+            checkBox2 = (CheckBox) rootView.findViewById(R.id.checkBoxMult2);
+            checkBox3 = (CheckBox) rootView.findViewById(R.id.checkBoxMult3);
 
             multipleChoice = (MultipleChoice) question;
 
@@ -272,41 +275,123 @@ public class TestActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onStart(){
+        public void onStart() {
             super.onStart();
         }
 
     }
 
-    public class FillingGapsFragment extends Fragment {
+    public class FillingGapsFragment extends ListFragment {
 
-        private ViewGroup layout;
         private FillingGaps fillingGaps;
         private TextView tip;
         private Button buttonNext;
-        private ArrayList<String> respuestasSeleccionadas;
+        private ViewGroup rootView;
+        private int posSelec;
+        private ArrayList<String> contestadas;
+        boolean elemNull;
 
         public FillingGapsFragment() {
 
         }
 
-
         public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.question_filling_gaps, container, false);
-            tip = (TextView)rootView.findViewById(R.id.tipo_fill_gaps);
+            rootView = (ViewGroup) inflater.inflate(R.layout.question_filling_gaps, container, false);
+            tip = (TextView) rootView.findViewById(R.id.tipo_fill_gaps);
             tip.setText("Tipo: FILLING GAPS");
             buttonNext = (Button) rootView.findViewById(R.id.btn_fill_gaps);
             fillingGaps = (FillingGaps) question;
+            contestadas = new ArrayList<String>(fillingGaps.getRespuestas().size());
+            elemNull = false;
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_edit_filling, fillingGaps.getList());
+            for (String res: fillingGaps.getRespuestas()){
+                contestadas.add(null);
+            }
 
-            //Asociamos el adaptador a la vista.
-            ListView lv = (ListView) rootView.findViewById(R.id.listViewFill);
-            lv.setAdapter(adapter);
+            buttonNext.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            for (String s : contestadas)
+                                if (s == null)
+                                    elemNull = true;
+
+                            if (elemNull == true) {
+                                Toast.makeText(getApplicationContext(), "Completa todos los espacios...", Toast.LENGTH_SHORT).show();
+                            }else {
+                                if (contestadas.equals(fillingGaps.getRespuestas())){
+                                    new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
+                                }else {
+                                    new SimpleDialog("Incorrecto!", "").show(getSupportFragmentManager(), "SimpleDialog");
+
+                                }
+                            }
+
+                        }
+                    }
+            );
+
+
+            makeList();
             return rootView;
         }
 
+        public void makeList(){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.text_edit_filling, fillingGaps.getList());
+
+            //Asociamos el adaptador a la vista.
+            ListView lv = (ListView) rootView.findViewById(android.R.id.list);
+            lv.setAdapter(adapter);
+        }
+
+        @Override
+        public void onListItemClick(ListView l, View v, int position, long id) {
+            super.onListItemClick(l, v, position, id);
+
+            this.posSelec = position;
+            // Hace click sobre un huevo
+            if (position % 2 == 1) {
+                //Toast.makeText(getApplicationContext(), l.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                ListDialog newFragment = new ListDialog(fillingGaps.getRespuestas());
+                newFragment.show(getSupportFragmentManager(), "ListRespuestas");
+
+            }
+
+        }
+
+
+        public class ListDialog extends DialogFragment {
+            private String[] respuestas;
+
+            public ListDialog(ArrayList<String> respuestas){
+                this.respuestas = new String[respuestas.size()];
+                for (int i = 0; i < respuestas.size(); i++){
+                    this.respuestas[i] = respuestas.get(i);
+                }
+            }
+            @Override
+            public Dialog onCreateDialog(Bundle savedInstanceState) {
+                ArrayList<String> dd = new ArrayList<>();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Selecciona una opción")
+                        .setItems(respuestas, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getApplicationContext(), String.valueOf(which), Toast.LENGTH_SHORT).show();
+
+                                contestadas.set((posSelec/2) ,respuestas[which]);
+                                fillingGaps.setList(posSelec, which);
+
+                                makeList();
+                                // The 'which' argument contains the index position
+                                // of the selected item
+                            }
+                        });
+                return builder.create();
+            }
+
+
+        }
 
     }
 
@@ -355,7 +440,6 @@ public class TestActivity extends AppCompatActivity {
 
     */
 
-
     public class SimpleDialog extends DialogFragment {
 
         private String correct;
@@ -374,6 +458,7 @@ public class TestActivity extends AppCompatActivity {
 
         /**
          * Crea un diálogo de alerta sencillo
+         *
          * @return Nuevo diálogo
          */
         public AlertDialog createSimpleDialog() {

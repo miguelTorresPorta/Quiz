@@ -41,12 +41,18 @@ public class FillingGaps extends Question{
             }
         }
 
+        // TODO Depurar Array ¿?
         ArrayList<String> ll = new ArrayList<>();
         for (int i = 0; i < this.tit.size() || i < this.respuestas.size(); i++){
             if (i < this.tit.size())
                 ll.add(this.tit.get(i));
-            if (i < this.respuestas.size())
-                ll.add("______________");
+            if (i < this.respuestas.size()){
+                String s = "";
+                for (int j = 0; j < this.respuestas.get(i).length(); j++)
+                    s = s + "_";
+                ll.add(s);
+            }
+
                 //ll.add(this.tit.get(i));
         }
         this.list = ll;
@@ -64,5 +70,9 @@ public class FillingGaps extends Question{
 
     public ArrayList<String> getList() {
         return this.list;
+    }
+
+    public void setList(int posSelec, int which) {
+        this.list.set(posSelec, this.respuestas.get(which));
     }
 }
