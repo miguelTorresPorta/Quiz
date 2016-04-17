@@ -98,7 +98,6 @@ public class RegistroActivity extends AppCompatActivity {
             validationErrorMessage.append(getString(R.string.diferentPass));
 
         }
-        //validationErrorMessage.append(getString(R.string.error_end));
 
         // If there is a validation error, display the error
         if (validationError) {
@@ -109,14 +108,6 @@ public class RegistroActivity extends AppCompatActivity {
             // Comprobamos que el usuario esta registrado
             newUser(username, password);
 
-            /*if (correcto == true){
-                Toast toast = Toast.makeText(getApplicationContext(), R.string.registroCorrecto, Toast.LENGTH_SHORT);
-                toast.show();
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), R.string.userPassWrong, Toast.LENGTH_SHORT);
-                toast.show();
-            }*/
-            // else Mensaje de error
         }
 
     }
@@ -153,8 +144,7 @@ public class RegistroActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.d(TAG, "Error Volley: " + error.getMessage());
-                                Toast.makeText(RegistroActivity.this, "Error de creacion", Toast.LENGTH_LONG)
-                                        .show();
+                                //Toast.makeText(RegistroActivity.this, "Error de creacion", Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -212,8 +202,11 @@ public class RegistroActivity extends AppCompatActivity {
                     // Enviar código de falla
                     this.setResult(Activity.RESULT_CANCELED);
                     // Terminar actividad
-                    this.finish();
+                    //this.finish();
                     break;
+                case "3":
+                    Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
+
             }
         } catch (JSONException e) {
             e.printStackTrace();

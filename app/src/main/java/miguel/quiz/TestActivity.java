@@ -265,8 +265,12 @@ public class TestActivity extends AppCompatActivity {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            // Iniciar actividad de actualización
-                            siguiente();
+
+                            if(checkBox1.isChecked() || checkBox2.isChecked() || checkBox3.isChecked()){
+                                siguiente();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Seleciona una opcion...", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
             );

@@ -13,6 +13,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+/* DEPRECATED
+ * Clase para la implementacion del servidor MySQL
+ * mediante JDBC
+ */
 public class JDBCHelper {
 
     //private static final String url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2106171";

@@ -24,16 +24,14 @@ import web.VolleySingleton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+ * Activity encargada de hacer el login de usuarios
+ */
 public class Login extends AppCompatActivity {
 
-
     private static final String TAG = AppCompatActivity.class.getSimpleName();
-
-    boolean correcto = false;
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Gson gson = new Gson();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +40,6 @@ public class Login extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        /*ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-        }*/
 
         // Set up the login form.
         usernameEditText = (EditText) findViewById(R.id.nameTxt);
@@ -58,12 +50,7 @@ public class Login extends AppCompatActivity {
         logBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 // Llamar a clase que compruebe si esta logeado
-                correcto = login();
-                if (correcto){
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                login();
             }
         });
 
@@ -72,15 +59,12 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 // Llamar a clase que para iniciar registro
                 registro();
-
-
-
             }
         });
 
     }
 
-    private boolean login(){
+    private void login(){
 
         // Cogemos el nombre y la pass introducida
         String username = usernameEditText.getText().toString().trim();
@@ -95,50 +79,30 @@ public class Login extends AppCompatActivity {
             validationErrorMessage.append(getString(R.string.error_blank_username));
         }
         if (password.length() == 0) {
-            /*if (validationError) {
-                validationErrorMessage.append(getString(R.string.error_join));
-            }*/
             validationError = true;
             validationErrorMessage.append(getString(R.string.error_blank_password));
         }
 
         // If there is a validation error, display the error
         if (validationError) {
-            Toast.makeText(Login.this, validationErrorMessage.toString(), Toast.LENGTH_LONG)
-                    .show();
+            Toast.makeText(Login.this, validationErrorMessage.toString(), Toast.LENGTH_LONG).show();
         } else {
             // Comprobamos que el usuario esta registrado
-            //correcto = JDBCHelper.checkUser(username, password);
             checkUser(username, password);
 
 
-            // Si esta registado entramos en los test
-            if (correcto == true){
-                Toast toast = Toast.makeText(getApplicationContext(), R.string.userPassOkey, Toast.LENGTH_SHORT);
-                toast.show();
-                //Intent intent = new Intent(Login.this, .class);
-                //startActivity(intent);
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), R.string.userPassWrong, Toast.LENGTH_SHORT);
-                toast.show();
-
-            }
         }
-        return correcto;
 
     }
 
     private void registro(){
         // Llamamos a la activity registro
         Intent intent = new Intent(Login.this, RegistroActivity.class);
-        //intent.putExtra("salutation", salutation);
         startActivity(intent);
-
     }
 
 
     public void checkUser(String name, String pass) {
-
 
         // Añadir parámetro a la URL del web service
         String newURL = Constantes.GET_CHECK + "?name=" + name + "&pass=" + pass;
@@ -153,13 +117,13 @@ public class Login extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 // Procesar respuesta Json
                                 procesarRespuesta(response);
-                                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-
                             }
                         },
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                String s = "Error de conexión...";
+                                Toast.makeText(Login.this, s, Toast.LENGTH_LONG).show();
                                 Log.d(TAG, "Error Volley: " + error.getMessage());
                             }
                         }
@@ -177,22 +141,25 @@ public class Login extends AppCompatActivity {
 
             switch (mensaje) {
                 case "1":
-                    correcto = true;
 
+                    String mensaje1 = "Login correcto";
+                    Toast.makeText(this, mensaje1, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
 
                     break;
 
                 case "2":
                     String mensaje2 = response.getString("mensaje");
-                    Toast.makeText(
-                            this,
-                            mensaje2,
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, mensaje2, Toast.LENGTH_LONG).show();
                     break;
+                case "3":
+                    String mensaje3 = response.getString("mensaje");
+                    Toast.makeText(this, mensaje3, Toast.LENGTH_LONG).show();
 
             }
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
