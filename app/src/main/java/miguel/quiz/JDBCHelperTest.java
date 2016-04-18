@@ -34,34 +34,6 @@ public class JDBCHelperTest {
     private static Statement st = null;
     private static PreparedStatement stmt = null;
 
-    // Devuelve un arraylist con todos la informacion de los autores
-  /*  public static ArrayList<Autores> getAutores() {
-        ArrayList<Autores> listAut = new ArrayList<>();
-        try {
-            StrictMode.ThreadPolicy policy =
-                    new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(url, user, pass);
-
-            st = con.createStatement();
-
-            rsAutores = st.executeQuery("SELECT * FROM Autores");
-
-            while (rsAutores.next()) {
-                listAut.add(new Autores(rsAutores.getObject(1).toString(), rsAutores.getObject(2).toString()));
-            }
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    return listAut;
-    }
-*/
     public static ArrayList<Test> getQuestions(){
 
         ArrayList<Test> listTest = new ArrayList<>();
