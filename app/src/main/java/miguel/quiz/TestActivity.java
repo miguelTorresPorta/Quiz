@@ -418,7 +418,7 @@ public class TestActivity extends AppCompatActivity {
                 builder.setTitle("Selecciona una opción")
                         .setItems(respuestas, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), String.valueOf(which), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), String.valueOf(which), Toast.LENGTH_SHORT).show();
 
                                 contestadas.set((posSelec/2) ,respuestas[which]);
                                 fillingGaps.setList(posSelec, which);
