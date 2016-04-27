@@ -23,6 +23,7 @@ import question.TrueFalse;
 
 public class JDBCHelperTest {
 
+    // prueba
     private static final String url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2106171";
     private static final String user = "sql2106171";
     private static final String pass = "tP7%aN9%";
