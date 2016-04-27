@@ -32,10 +32,11 @@ public class Constantes {
      * URLs del Web Service
      */
 
-    public static final String GET_CHECK = "http://" + IP + PUERTO_HOST + "/user/check_user.php";
+    public static final String GET_CHECK = "http://" + IP + PUERTO_HOST + "/Quiz/user/check_user.php";
 
-    public static final String INSERT_USER = "http://" + IP + PUERTO_HOST + "/user/insertar_usuario.php";
-    public static final String INSERT = "http://" + IP + PUERTO_HOST + "/Wish/insertar_meta.php";
+    public static final String INSERT_USER = "http://" + IP + PUERTO_HOST + "/Quiz/user/insertar_usuario.php";
+
+    public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/Quiz/Test/get_authors.php";
 
     //public static final String GET = "http://" + IP + PUERTO_HOST + "/Wish/obtener_metas.php";
     //public static final String GET_BY_ID = "http://" + IP + PUERTO_HOST + "/Wish/obtener_meta_por_id.php";

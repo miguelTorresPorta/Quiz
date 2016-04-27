@@ -23,9 +23,14 @@ import question.TrueFalse;
 
 public class JDBCHelperTest {
 
-    private static final String url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2106171";
-    private static final String user = "sql2106171";
-    private static final String pass = "tP7%aN9%";
+    //private static final String url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql2106171";
+    //private static final String user = "sql2106171";
+    //private static final String pass = "tP7%aN9%";
+
+    //private static final String url = "jdbc:mysql://192.168.43.153:3306/test";
+    private static final String url = "jdbc:mysql://10.0.2.2:3306/test";
+    private static final String user = "root";
+    private static final String pass = "";
     private static Connection con = null;
     private static ResultSet rsAutores = null;
     private static ResultSet rsQuestions = null;
@@ -84,7 +89,6 @@ public class JDBCHelperTest {
                     int id = rsQuestions.getInt(1);
                     //MultipleChoice m = new MultipleChoice(rsQuestions.getObject(2).toString(), rsQuestions.getObject(3).toString(), null, null);
                     //listMC.add(m);
-                    // TODO hacer consulta
                     stmt = con.prepareStatement("SELECT Id, IdMultipleChoice, Titulo, Correct, Comentario FROM PreguntasMult WHERE IdMultipleChoice = ?");
                     stmt.setInt(1, id);
                     rsMultiple = stmt.executeQuery();

@@ -191,8 +191,10 @@ public class TestActivity extends AppCompatActivity {
                             if (rTrue.isChecked()) {
                                 if (verdadero) {
                                     // En algún lugar de tu actividad
-                                    new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
+                                    //new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
                                     //Toast.makeText(getApplicationContext(), "CORRECTO!!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "¡CORRECTO!" + respuesta, Toast.LENGTH_LONG).show();
+                                    siguiente();
                                 } else {
                                     // En algún lugar de tu actividad
                                     new SimpleDialog("Incorrecto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
@@ -206,8 +208,9 @@ public class TestActivity extends AppCompatActivity {
                                     //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     // En algún lugar de tu actividad
-                                    new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
-                                    //Toast.makeText(getApplicationContext(), "CORRECTO!!", Toast.LENGTH_SHORT).show();
+                                    //new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
+                                    Toast.makeText(getApplicationContext(), "¡CORRECTO!" + respuesta, Toast.LENGTH_LONG).show();
+                                    siguiente();
                                 }
 
                             } else {
@@ -236,6 +239,8 @@ public class TestActivity extends AppCompatActivity {
         private CheckBox checkBox2;
         private CheckBox checkBox3;
         private MultipleChoice multipleChoice;
+        private ArrayList<Boolean> respuestas;
+        private boolean preguntaCorrecta;
 
         public MultipleChoiceFragment() {
 
@@ -260,6 +265,9 @@ public class TestActivity extends AppCompatActivity {
             checkBox1.setText(multipleChoice.getFeebackByPos(0));
             checkBox2.setText(multipleChoice.getFeebackByPos(1));
             checkBox3.setText(multipleChoice.getFeebackByPos(2));
+            respuestas = multipleChoice.getRespuestas();
+            preguntaCorrecta = true;
+
 
             buttonNext.setOnClickListener(
                     new View.OnClickListener() {
@@ -267,7 +275,33 @@ public class TestActivity extends AppCompatActivity {
                         public void onClick(View v) {
 
                             if(checkBox1.isChecked() || checkBox2.isChecked() || checkBox3.isChecked()){
-                                siguiente();
+
+                                if (checkBox1.isChecked() != respuestas.get(0))
+                                    preguntaCorrecta = false;
+                                if (checkBox2.isChecked() != respuestas.get(1))
+                                    preguntaCorrecta = false;
+                                if (checkBox3.isChecked() != respuestas.get(2))
+                                    preguntaCorrecta = false;
+
+                                if (preguntaCorrecta) {
+                                    // En algún lugar de tu actividad
+                                    //new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
+                                    Toast.makeText(getApplicationContext(), "¡CORRECTO!", Toast.LENGTH_SHORT).show();
+                                    siguiente();
+                                } else {
+
+                                    String s = "";
+                                    if (respuestas.get(0))
+                                        s = multipleChoice.getFeebackByPos(0) + "\n";
+                                    if (respuestas.get(1))
+                                        s = multipleChoice.getFeebackByPos(1) + "\n";
+                                    if (respuestas.get(2))
+                                        s = multipleChoice.getFeebackByPos(2) + "\n";
+                                    // En algún lugar de tu actividad
+                                    new SimpleDialog("Incorrecto!", s).show(getSupportFragmentManager(), "SimpleDialog");
+                                    //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
+                                }
+                                //siguiente();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Seleciona una opcion...", Toast.LENGTH_SHORT).show();
                             }
@@ -325,7 +359,10 @@ public class TestActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Completa todos los espacios...", Toast.LENGTH_SHORT).show();
                             }else {
                                 if (contestadas.equals(fillingGaps.getRespuestas())){
-                                    new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
+                                    //new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
+                                    Toast.makeText(getApplicationContext(), "¡CORRECTO!", Toast.LENGTH_LONG).show();
+                                    siguiente();
+
                                 }else {
                                     new SimpleDialog("Incorrecto!", "").show(getSupportFragmentManager(), "SimpleDialog");
 
@@ -399,50 +436,6 @@ public class TestActivity extends AppCompatActivity {
 
     }
 
-
-    /*    @Override
-        public View onCreateView(final LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.question_filling_gaps, container, false);
-            tip = (TextView)rootView.findViewById(R.id.tipo_fill_gaps);
-            layout = (ViewGroup) rootView.findViewById(R.id.content);
-            buttonNext = (Button) rootView.findViewById(R.id.btn_fill_gaps);
-            fillingGaps = (FillingGaps) question;
-            respuestasSeleccionadas = new ArrayList<String>();
-            tip.setText("Tipo: FILLING GAPS");
-            // Llenamos todos
-            addChild(fillingGaps.getTit(), fillingGaps.getRespuestas());
-            buttonNext.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // TODO
-                            siguiente();
-                        }
-                    }
-            );
-            return rootView;
-        }
-
-
-
-        private void addChild(ArrayList<String> listTitulo, ArrayList<String> listRespuestas){
-            LayoutInflater inflater = LayoutInflater.from(getApplicationContext());
-            int id = R.layout.text_edit_filling;
-
-            for(int i=0; i<listRespuestas.size(); i++){
-                LinearLayout relativeLayout = (LinearLayout) inflater.inflate(id, null, false);
-                TextView textView = (TextView) relativeLayout.findViewById(R.id.textViewDate);
-                Button but = (Button) relativeLayout.findViewById(R.id.editTextFill);
-                textView.setText(listTitulo.get(i));
-                but.setText(listRespuestas.get(i));
-                layout.addView(relativeLayout);
-            }
-        }
-
-    }
-
-    */
 
     public class SimpleDialog extends DialogFragment {
 
