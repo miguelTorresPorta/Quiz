@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listTest = JDBCHelperTest.getQuestions();
-        //getQuestionary();
-       // HelperGetTest.cargarAutores(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
