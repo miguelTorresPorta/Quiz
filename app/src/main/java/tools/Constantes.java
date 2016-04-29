@@ -23,7 +23,7 @@ public class Constantes {
     /**
      * Dirección IP de para la AVD
      */
-    //private static final String IP = "10.0.2.2";
+    private static final String IP = "10.0.2.2";
     /**
      * Direccion IP para movil, consultar con ifconfig en el terminal
      */
@@ -31,7 +31,7 @@ public class Constantes {
     /**
      * Direccion servidor Hostinger
      */
-    private static final String IP = "servquiz.hol.es";
+    //private static final String IP = "servquiz.hol.es";
     /**
      * URLs del Web Service
      */
@@ -39,17 +39,17 @@ public class Constantes {
     /**
      * URL web service Hostinger
      */
-    public static final String GET_CHECK = "http://" + IP + PUERTO_HOST + "/check_user.php";
+    //public static final String GET_CHECK = "http://" + IP + PUERTO_HOST + "/check_user.php";
 
-    //public static final String GET_CHECK = "http://" + IP + PUERTO_HOST + "/Quiz/user/check_user.php";
+    public static final String GET_CHECK = "http://" + IP + PUERTO_HOST + "/Quiz/user/check_user.php";
 
-    public static final String INSERT_USER = "http://" + IP + PUERTO_HOST + "/insertar_usuario.php";
+    //public static final String INSERT_USER = "http://" + IP + PUERTO_HOST + "/insertar_usuario.php";
 
-    //public static final String INSERT_USER = "http://" + IP + PUERTO_HOST + "/Quiz/user/insertar_usuario.php";
+    public static final String INSERT_USER = "http://" + IP + PUERTO_HOST + "/Quiz/user/insertar_usuario.php";
 
-    public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/get_authors.php";
+    //public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/get_authors.php";
 
-    //public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/Quiz/Test/get_authors.php";
+    public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/Quiz/Test/get_authors.php";
 
     //public static final String GET = "http://" + IP + PUERTO_HOST + "/Wish/obtener_metas.php";
     //public static final String GET_BY_ID = "http://" + IP + PUERTO_HOST + "/Wish/obtener_meta_por_id.php";

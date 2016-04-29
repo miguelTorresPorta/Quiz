@@ -9,15 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
-
 
 /**
  * Created by migueltorresporta on 3/4/16.
  */
 // Fragment para las historias
 public class HistorySectionFragment extends Fragment {
+
+    private static final String TAG = HistorySectionFragment.class.getSimpleName();
 
 
     @Override
@@ -29,7 +29,6 @@ public class HistorySectionFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         return recyclerView;
     }
@@ -84,6 +83,7 @@ public class HistorySectionFragment extends Fragment {
 
 
     }
+
 
 
 }
