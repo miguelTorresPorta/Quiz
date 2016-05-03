@@ -50,6 +50,9 @@ public class Constantes {
     //public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/get_authors.php";
 
     public static final String GET_AUTHORS = "http://" + IP + PUERTO_HOST + "/Quiz/Test/get_authors.php";
+    public static final String GET_FILLING = "http://" + IP + PUERTO_HOST + "/Quiz/Test/obtener_test_filling_gaps.php";
+
+
 
     //public static final String GET = "http://" + IP + PUERTO_HOST + "/Wish/obtener_metas.php";
     //public static final String GET_BY_ID = "http://" + IP + PUERTO_HOST + "/Wish/obtener_meta_por_id.php";

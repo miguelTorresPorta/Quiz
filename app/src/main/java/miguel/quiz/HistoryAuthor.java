@@ -6,6 +6,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
@@ -20,7 +21,11 @@ public class HistoryAuthor extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_close);
+
+
+
 
         // Set Collapsing Toolbar layout to the screen
         CollapsingToolbarLayout collapsingToolbar =
@@ -33,5 +38,18 @@ public class HistoryAuthor extends AppCompatActivity {
 
         TextView descre = (TextView) findViewById(R.id.descrAuthor);
         descre.setText(getIntent().getStringExtra("description"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

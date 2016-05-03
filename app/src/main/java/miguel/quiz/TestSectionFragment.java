@@ -31,9 +31,6 @@ public class TestSectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        //ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.quiz_activity, container, false);
-
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
         ContentAdapter adapter = new ContentAdapter();
@@ -43,25 +40,6 @@ public class TestSectionFragment extends Fragment {
 
 
         return recyclerView;
-
-        // Create datasource
-        //List<String> listAutores = new ArrayList<String>();
-        //for (int i = 0; i < MainActivity.getSize(); i++){
-        //    listAutores.add(MainActivity.getTestByPosition(i).getName());
-
-        //}
-
-
-        // Create adapter
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.row_layout_test, R.id.txtitem, listAutores);
-
-        // Bind adapter to the list fragment
-        //setListAdapter(adapter);
-
-        // Retail listFragment instance across configuration changes
-        //setRetainInstance(true);
-
-        //return rootView;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -88,19 +66,6 @@ public class TestSectionFragment extends Fragment {
         }
     }
 
-    // Handling item click
-    /*public void onListItemClick (ListView l, View view, int position, long id){
-        ViewGroup viewGroup = (ViewGroup) view;
-
-        // Pass of the postition Test to make easier to get the object in the other Activity
-        Intent intent = new Intent(getActivity(), TestActivity
-                .class);
-
-
-        intent.putExtra("Position", String.valueOf(position));
-        startActivity(intent);
-
-    }*/
 
     /**
      * Adapter to display recycler view.
