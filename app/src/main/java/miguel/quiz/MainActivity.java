@@ -49,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
         // llamamos al layout activity_main.xml
         setContentView(R.layout.activity_main);
 
+        WebServiceHelper wsHelper = new WebServiceHelper(getApplicationContext());
+        listTest = wsHelper.getQuestions();
+
         listTest = JDBCHelperTest.getQuestions();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -134,116 +138,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void getQuestionary(){
 
-        String newURL = Constantes.GET_AUTHORS;
-        // Realizar petición GET_BY_ID
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(
-                new JsonObjectRequest(
-                        Request.Method.GET,
-                        newURL,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                // Procesar respuesta Json
-                                procesarRespuesta(response);
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                String s = "Error de conexión...";
-                                Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG).show();
-                                Log.d(TAG, "Error Volley: " + error.getMessage());
-                            }
-                        }
-                )
-        );
-    }
-    private void procesarRespuesta(JSONObject response) {
-
-        try {
-            // Obtener atributo "mensaje"
-            String estado = response.getString("estado");
-            String name;
-            String description;
-            ArrayList<FillingGaps> listFG = new ArrayList<>();
-            ArrayList<TrueFalse> listTF = new ArrayList<>();
-            ArrayList<MultipleChoice> listMC = new ArrayList<>();
-
-
-            switch (estado) {
-                case "1": // EXITO
-                    // Obtener array "Authors" Json
-                    JSONArray mensaje = (JSONArray) response.get("authors");
-                    //response = response.getJSONObject("authors");
-
-                    for (int i = 0; i < mensaje.length(); i++){
-                        listFG.clear();
-                        listTF.clear();
-                        listMC.clear();
-
-                        JSONObject obj = (JSONObject) mensaje.get(i);
-                        name = (String) obj.get("Nombre");
-                        description = (String) obj.get("Descripcion");
-
-
-
-                        Log.d(TAG, "Error Volley: " + "d");
-
-                    }
-/*
-                    JSONObject author;
-                    String s = "";
-
-                    for(int i = 0; i < mensaje.length(); i++){
-                        listFG.clear();
-                        listTF.clear();
-                        listMC.clear();
-                        ArrayList<Boolean> correct = new ArrayList<>();
-                        ArrayList<String> coment = new ArrayList<>();
-
-                        author = (JSONObject) mensaje.get(i);
-                        //author.get("Nombre");
-
-                        name = author.get("Nombre").toString();
-                        description = author.get("Descripcion").toString();
-
-                        listFG.add(new FillingGaps(rsQuestions.getObject(1).toString(), rsQuestions.getObject(2).toString(), rsQuestions.getObject(3).toString()));
-
-
-                        while (name != author.get("Nombre").toString()){
-
-
-                            correct.add(author.getBoolean("Correct"));
-                            coment.add(author.get("Comentario").toString());
-                            author = (JSONObject) mensaje.get(i);
-                            i++;
-
-                        }
-                        MultipleChoice m = new MultipleChoice(author.get("TituloPregunta").toString(), author.get("Tipo").toString(),
-                                correct, coment);
-                        listMC.add(m);
-
-                        listTest.add(new Test(name, description, listFG, listTF, listMC));
-
-                        Log.d(TAG, author.get("Nombre").toString());
-                    }
-*/
-                    break;
-                case "2": // FALLIDO
-                    String mensaje2 = response.getString("mensaje");
-                    Toast.makeText(
-                            this,
-                            mensaje2,
-                            Toast.LENGTH_LONG).show();
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     }
 

@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by migueltorresporta on 3/4/16.
  */
@@ -18,17 +20,28 @@ import android.widget.TextView;
 public class HistorySectionFragment extends Fragment {
 
     private static final String TAG = HistorySectionFragment.class.getSimpleName();
+    static ArrayList<String> a;
 
-
+    // Creamos la vista del fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflamos el layout
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
+
+        // Creamos el adaptador
         ContentAdapter adapter = new ContentAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        a = new ArrayList<>(100);
+
+        for (int i = 0; i < 100; i++){
+            a.add(String.valueOf(i));
+        }
+
 
         return recyclerView;
     }
@@ -61,18 +74,21 @@ public class HistorySectionFragment extends Fragment {
 
     }
 
+    // Clase adaptador de contenido para el recycler
     public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder>{
         // Set numbers of Card in RecyclerView.
-
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
         }
 
+        // Se añade la informacion al recicler view
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            ViewHolder.card_title.setText(MainActivity.getTestByPosition(position).getName());
-            ViewHolder.card_text.setText(MainActivity.getTestByPosition(position).getDescription());
+            //String name = MainActivity.getTestByPosition(position).getName();
+            ViewHolder.card_title.setText(a.get(position));
+            //String description = MainActivity.getTestByPosition(position).getDescription()
+            ViewHolder.card_text.setText((a.get(position)));
         }
 
         @Override

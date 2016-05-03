@@ -30,7 +30,7 @@ public final class VolleySingleton {
      * @param context contexto donde se ejecutarán las peticiones
      * @return Instancia
      */
-    public static synchronized VolleySingleton getInstance(Context context) {
+    public static VolleySingleton getInstance(Context context) {
         if (singleton == null) {
             singleton = new VolleySingleton(context.getApplicationContext());
         }
