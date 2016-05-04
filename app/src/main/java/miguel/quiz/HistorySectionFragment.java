@@ -55,10 +55,7 @@ public class HistorySectionFragment extends Fragment {
                 }
             });
 
-
         }
-
-
     }
 
     public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder>{
@@ -79,12 +76,12 @@ public class HistorySectionFragment extends Fragment {
         public int getItemCount() {
             return MainActivity.getSize();
         }
-
+}
 
 
     }
 
 
 
-}
+
 
