@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class HistorySectionFragment extends Fragment {
 
     private static final String TAG = HistorySectionFragment.class.getSimpleName();
-    static ArrayList<String> a;
 
     // Creamos la vista del fragment
     @Override
@@ -35,12 +34,6 @@ public class HistorySectionFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        a = new ArrayList<>(100);
-
-        for (int i = 0; i < 100; i++){
-            a.add(String.valueOf(i));
-        }
 
 
         return recyclerView;
@@ -85,10 +78,10 @@ public class HistorySectionFragment extends Fragment {
         // Se añade la informacion al recicler view
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            //String name = MainActivity.getTestByPosition(position).getName();
-            ViewHolder.card_title.setText(a.get(position));
-            //String description = MainActivity.getTestByPosition(position).getDescription()
-            ViewHolder.card_text.setText((a.get(position)));
+            String name = MainActivity.getTestByPosition(position).getName();
+            ViewHolder.card_title.setText(name);
+            String description = MainActivity.getTestByPosition(position).getDescription();
+            ViewHolder.card_text.setText(description);
         }
 
         @Override
