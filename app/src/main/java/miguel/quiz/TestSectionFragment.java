@@ -42,35 +42,11 @@ public class TestSectionFragment extends Fragment {
         return recyclerView;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        static TextView name;
-        static TextView numPreguntas;
-
-        public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.item_quiz, parent, false));
-
-            name = (TextView)itemView.findViewById(R.id.title_author);
-            numPreguntas = (TextView)itemView.findViewById(R.id.num_preg);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, TestActivity.class);
-                    intent.putExtra("Position", Integer.toString(getAdapterPosition()));
-
-                    context.startActivity(intent);
-                }
-            });
-        }
-    }
-
 
     /**
      * Adapter to display recycler view.
      */
-    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
+    public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ViewHolder> {
         // Set numbers of List in RecyclerView.
 
         @Override
@@ -80,16 +56,40 @@ public class TestSectionFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            ViewHolder.name.setText(MainActivity.getTestByPosition(position).getName());
+            holder.name.setText(MainActivity.getTestByPosition(position).getName());
 
             String numPreg = "Numero de preguntas " + Integer.toString(MainActivity.getTestByPosition(position).getNumQuestions());
-            ViewHolder.numPreguntas.setText(numPreg);
+            holder.numPreguntas.setText(numPreg);
 
         }
 
         @Override
         public int getItemCount() {
             return MainActivity.getSize();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+            TextView name;
+            TextView numPreguntas;
+
+            public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
+                super(inflater.inflate(R.layout.item_quiz, parent, false));
+
+                name = (TextView)itemView.findViewById(R.id.title_author);
+                numPreguntas = (TextView)itemView.findViewById(R.id.num_preg);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context, TestActivity.class);
+                        intent.putExtra("Position", Integer.toString(getAdapterPosition()));
+
+                        context.startActivity(intent);
+                    }
+                });
+            }
         }
     }
 
