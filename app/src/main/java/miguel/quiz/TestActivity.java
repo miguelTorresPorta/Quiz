@@ -340,10 +340,10 @@ public class TestActivity extends AppCompatActivity {
             tip.setText("Tipo: FILLING GAPS");
             buttonNext = (Button) rootView.findViewById(R.id.btn_fill_gaps);
             fillingGaps = (FillingGaps) question;
-            contestadas = new ArrayList<String>(fillingGaps.getRespuestas().size());
+            contestadas = new ArrayList<String>(fillingGaps.getRespuestasAleatorio().size());
             elemNull = false;
 
-            for (String res: fillingGaps.getRespuestas()){
+            for (String res: fillingGaps.getRespuestasAleatorio()){
                 contestadas.add(null);
             }
 
@@ -358,7 +358,7 @@ public class TestActivity extends AppCompatActivity {
                             if (elemNull == true) {
                                 Toast.makeText(getApplicationContext(), "Completa todos los espacios...", Toast.LENGTH_SHORT).show();
                             }else {
-                                if (contestadas.equals(fillingGaps.getRespuestas())){
+                                if (contestadas.equals(fillingGaps.getRespuestasCorrectas())){
                                     //new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
                                     Toast.makeText(getApplicationContext(), "¡CORRECTO!", Toast.LENGTH_LONG).show();
                                     siguiente();
@@ -368,11 +368,9 @@ public class TestActivity extends AppCompatActivity {
 
                                 }
                             }
-
                         }
                     }
             );
-
 
             makeList();
             return rootView;
@@ -394,7 +392,8 @@ public class TestActivity extends AppCompatActivity {
             // Hace click sobre un huevo
             if (position % 2 == 1) {
                 //Toast.makeText(getApplicationContext(), l.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-                ListDialog newFragment = new ListDialog(fillingGaps.getRespuestas());
+                //ListDialog newFragment = new ListDialog(fillingGaps.getRespuestasCorrectas());
+                ListDialog newFragment = new ListDialog(fillingGaps.getRespuestasAleatorio());
                 newFragment.show(getSupportFragmentManager(), "ListRespuestas");
 
             }
@@ -413,7 +412,6 @@ public class TestActivity extends AppCompatActivity {
             }
             @Override
             public Dialog onCreateDialog(Bundle savedInstanceState) {
-                ArrayList<String> dd = new ArrayList<>();
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Selecciona una opción")
                         .setItems(respuestas, new DialogInterface.OnClickListener() {
@@ -430,10 +428,7 @@ public class TestActivity extends AppCompatActivity {
                         });
                 return builder.create();
             }
-
-
         }
-
     }
 
 
@@ -474,10 +469,5 @@ public class TestActivity extends AppCompatActivity {
             return builder.create();
         }
     }
-
-
 }
-// TODO !!!!!!!!
-// Cada vez que se pulsa una opcion se abre un dialogo con las opciones disponibles
-// cada vez que se seleciona un una op se llama un metodo que llama al array con con el numero de respuestas seleccionaas!!!!
 

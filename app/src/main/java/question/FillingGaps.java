@@ -9,29 +9,36 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import miguel.quiz.R;
 
 public class FillingGaps extends Question{
-    //ArrayList<String> respuestas;
-    private ArrayList<String> respuestas;
+
+    private ArrayList<String> respuestasCorrectas;
+    private ArrayList<String> respuestasAleatorio;
     private ArrayList<String> tit;
     private ArrayList<String> list;
 
-
     public FillingGaps(String tituloPregunta, String tipo, String respuestas) {
         super(tituloPregunta, tipo);
-        this.respuestas = new ArrayList<String>();
+        this.respuestasCorrectas = new ArrayList<String>();
         this.tit = new ArrayList<String>();
+        this.respuestasAleatorio = new ArrayList<>();
 
         respuestas = respuestas.trim();
-        //respuestas.indexOf(":");
         respuestas = respuestas.substring(respuestas.indexOf(":") + 1, respuestas.length());
+
+        // Separamos las respuestas
         String[] listaRespuestas = respuestas.split("/");
         int lenghtListaRespuetas = listaRespuestas.length;
+
+        // Introducimos cada respuesta en el arraylist
         for (int i = 0; i < lenghtListaRespuetas; i++){
-            this.respuestas.add(listaRespuestas[i].trim());
+            this.respuestasCorrectas.add(listaRespuestas[i].trim());
         }
+
         String[] listTitulo = tituloPregunta.split("_");
 
         int lenghtListaTitulo = listTitulo.length;
@@ -43,36 +50,39 @@ public class FillingGaps extends Question{
 
         // TODO Depurar Array ¿?
         ArrayList<String> ll = new ArrayList<>();
-        for (int i = 0; i < this.tit.size() || i < this.respuestas.size(); i++){
+        for (int i = 0; i < this.tit.size() || i < this.respuestasCorrectas.size(); i++){
             if (i < this.tit.size())
                 ll.add(this.tit.get(i));
-            if (i < this.respuestas.size()){
+            if (i < this.respuestasCorrectas.size()){
                 String s = "";
-                for (int j = 0; j < this.respuestas.get(i).length(); j++)
+                for (int j = 0; j < this.respuestasCorrectas.get(i).length(); j++)
                     s = s + "_";
                 ll.add(s);
             }
-
-                //ll.add(this.tit.get(i));
         }
         this.list = ll;
-        }
 
+        this.respuestasAleatorio.addAll(respuestasCorrectas);
 
-    public ArrayList<String> getRespuestas(){
-        return this.respuestas;
+        Collections.shuffle(this.respuestasAleatorio);
+
+        int a = 0;
+
     }
 
-    public ArrayList<String> getTit(){
-        return this.tit;
+    public ArrayList<String> getRespuestasCorrectas(){
+        return this.respuestasCorrectas;
     }
 
+    public ArrayList<String> getRespuestasAleatorio(){
+        return this.respuestasAleatorio;
+    }
 
     public ArrayList<String> getList() {
         return this.list;
     }
 
     public void setList(int posSelec, int which) {
-        this.list.set(posSelec, this.respuestas.get(which));
+        this.list.set(posSelec, this.respuestasAleatorio.get(which));
     }
 }

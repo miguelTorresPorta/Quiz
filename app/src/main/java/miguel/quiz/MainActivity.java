@@ -83,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_acerca) {
 
-            Toast.makeText(getApplicationContext(),
-                    "...", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, About.class );
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

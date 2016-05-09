@@ -25,6 +25,7 @@
         <activity android:name="login.RegistroActivity" />
         <activity android:name=".TestActivity" />
         <activity android:name=".HistoryAuthor"/>
+        <activity android:name=".About"/>
         <activity android:name="login.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
