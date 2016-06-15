@@ -72,8 +72,7 @@ public class JDBCHelperTest {
                 description = rsAutores.getObject(2).toString();
 
 
-                // Fix query WHERE NombreAutor = name
-                // Hacer consultas FillingGaps
+
                 stmt = con.prepareStatement("SELECT TituloPregunta, Tipo, Listado FROM FillingGaps where NombreAutor = ?");
                 stmt.setString(1, name);
                 rsQuestions = stmt.executeQuery();
@@ -88,8 +87,6 @@ public class JDBCHelperTest {
                 rsQuestions = stmt.executeQuery();
                 while(rsQuestions.next()){
                     int id = rsQuestions.getInt(1);
-                    //MultipleChoice m = new MultipleChoice(rsQuestions.getObject(2).toString(), rsQuestions.getObject(3).toString(), null, null);
-                    //listMC.add(m);
                     stmt = con.prepareStatement("SELECT Id, IdMultipleChoice, Titulo, Correct, Comentario FROM PreguntasMult WHERE IdMultipleChoice = ?");
                     stmt.setInt(1, id);
                     rsMultiple = stmt.executeQuery();

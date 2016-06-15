@@ -3,16 +3,8 @@ package question;
 /**
  * Created by migueltorresporta.
  */
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import java.util.ArrayList;
-
-import miguel.quiz.R;
-import miguel.quiz.ResourceInterfaz;
 
 public class MultipleChoice extends Question {
     ArrayList<Boolean> respuestas;
@@ -26,18 +18,9 @@ public class MultipleChoice extends Question {
         this.feedback.addAll(feedback);
     }
 
-    // Constructor por defecto
-    public MultipleChoice(){
-        super(null, null);
-    }
-
 
     public ArrayList<Boolean> getRespuestas(){
         return respuestas;
-    }
-
-    public ArrayList<String> getFeedback(){
-        return feedback;
     }
 
     public String getFeebackByPos(int i){

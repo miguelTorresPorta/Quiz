@@ -20,12 +20,7 @@ import org.w3c.dom.Text;
  */
 public class TestSectionFragment extends Fragment {
 
-/*
-        @Override
-        public View onCreateView(final LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
 
-        }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

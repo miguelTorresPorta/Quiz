@@ -48,7 +48,6 @@ public class FillingGaps extends Question{
             }
         }
 
-        // TODO Depurar Array ¿?
         ArrayList<String> ll = new ArrayList<>();
         for (int i = 0; i < this.tit.size() || i < this.respuestasCorrectas.size(); i++){
             if (i < this.tit.size())

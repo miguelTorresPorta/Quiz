@@ -21,10 +21,6 @@ public class HistoryAuthor extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-        //getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_close);
-
-
 
 
         // Set Collapsing Toolbar layout to the screen

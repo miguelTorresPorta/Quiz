@@ -50,9 +50,6 @@ public class TestActivity extends AppCompatActivity {
     private Question question;
     private int position;
     private int numQuestions;
-    //private MultipleChoice multipleChoice;
-    //private FillingGaps fillingGaps;
-
 
     //Test test = new Test();
     public void onCreate(Bundle savedInstanceState) {
@@ -190,25 +187,16 @@ public class TestActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             if (rTrue.isChecked()) {
                                 if (verdadero) {
-                                    // En algún lugar de tu actividad
-                                    //new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
-                                    //Toast.makeText(getApplicationContext(), "CORRECTO!!", Toast.LENGTH_SHORT).show();
                                     Toast.makeText(getApplicationContext(), "¡CORRECTO!" + respuesta, Toast.LENGTH_LONG).show();
                                     siguiente();
                                 } else {
-                                    // En algún lugar de tu actividad
                                     new SimpleDialog("Incorrecto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
-                                    //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
                                 }
 
                             } else if (rFalse.isChecked()) {
                                 if (verdadero) {
-                                    // En algún lugar de tu actividad
                                     new SimpleDialog("Incorrecto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
-                                    //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    // En algún lugar de tu actividad
-                                    //new SimpleDialog("Correcto!", respuesta).show(getSupportFragmentManager(), "SimpleDialog");
                                     Toast.makeText(getApplicationContext(), "¡CORRECTO!" + respuesta, Toast.LENGTH_LONG).show();
                                     siguiente();
                                 }
@@ -220,14 +208,8 @@ public class TestActivity extends AppCompatActivity {
                         }
                     }
             );
-
-
             return rootView;
         }
-
-
-
-
     }
 
     public class MultipleChoiceFragment extends Fragment {
@@ -284,8 +266,6 @@ public class TestActivity extends AppCompatActivity {
                                     preguntaCorrecta = false;
 
                                 if (preguntaCorrecta) {
-                                    // En algún lugar de tu actividad
-                                    //new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
                                     Toast.makeText(getApplicationContext(), "¡CORRECTO!", Toast.LENGTH_SHORT).show();
                                     siguiente();
                                 } else {
@@ -299,9 +279,7 @@ public class TestActivity extends AppCompatActivity {
                                         s = multipleChoice.getFeebackByPos(2) + "\n";
                                     // En algún lugar de tu actividad
                                     new SimpleDialog("Incorrecto!", s).show(getSupportFragmentManager(), "SimpleDialog");
-                                    //Toast.makeText(getApplicationContext(), "INCORRECTO!!", Toast.LENGTH_SHORT).show();
                                 }
-                                //siguiente();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Seleciona una opcion...", Toast.LENGTH_SHORT).show();
                             }
@@ -359,7 +337,6 @@ public class TestActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Completa todos los espacios...", Toast.LENGTH_SHORT).show();
                             }else {
                                 if (contestadas.equals(fillingGaps.getRespuestasCorrectas())){
-                                    //new SimpleDialog("Correcto!", "").show(getSupportFragmentManager(), "SimpleDialog");
                                     Toast.makeText(getApplicationContext(), "¡CORRECTO!", Toast.LENGTH_LONG).show();
                                     siguiente();
 
@@ -391,8 +368,6 @@ public class TestActivity extends AppCompatActivity {
             this.posSelec = position;
             // Hace click sobre un huevo
             if (position % 2 == 1) {
-                //Toast.makeText(getApplicationContext(), l.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-                //ListDialog newFragment = new ListDialog(fillingGaps.getRespuestasCorrectas());
                 ListDialog newFragment = new ListDialog(fillingGaps.getRespuestasAleatorio());
                 newFragment.show(getSupportFragmentManager(), "ListRespuestas");
 
@@ -416,14 +391,11 @@ public class TestActivity extends AppCompatActivity {
                 builder.setTitle("Selecciona una opción")
                         .setItems(respuestas, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                //Toast.makeText(getApplicationContext(), String.valueOf(which), Toast.LENGTH_SHORT).show();
 
                                 contestadas.set((posSelec/2) ,respuestas[which]);
                                 fillingGaps.setList(posSelec, which);
 
                                 makeList();
-                                // The 'which' argument contains the index position
-                                // of the selected item
                             }
                         });
                 return builder.create();

@@ -88,9 +88,7 @@ public class RegistroActivity extends AppCompatActivity {
             validationErrorMessage.append(getString(R.string.error_blank_username));
         }
         if (password.length() == 0 || passwordAgain.length() == 0) {
-            /*if (validationError) {
-                validationErrorMessage.append(getString(R.string.error_join));
-            }*/
+
             validationError = true;
             validationErrorMessage.append(getString(R.string.error_blank_password));
         } else if(!password.equals(passwordAgain)){
@@ -144,7 +142,6 @@ public class RegistroActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.d(TAG, "Error Volley: " + error.getMessage());
-                                //Toast.makeText(RegistroActivity.this, "Error de creacion", Toast.LENGTH_LONG).show();
                             }
                         }
 
@@ -202,7 +199,6 @@ public class RegistroActivity extends AppCompatActivity {
                     // Enviar código de falla
                     this.setResult(Activity.RESULT_CANCELED);
                     // Terminar actividad
-                    //this.finish();
                     break;
                 case "3":
                     Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();

@@ -18,20 +18,8 @@ public class Question{
         this.tipo = tipo;
     }
 
-    public String getNumPregunta() {
-        return numPregunta;
-    }
-
-    public void setNumPregunta(String numPregunta) {
-        this.numPregunta = numPregunta;
-    }
-
     public String getTituloPregunta() {
         return tituloPregunta;
-    }
-
-    public void setTituloPregunta(String tituloPregunta) {
-        this.tituloPregunta = tituloPregunta;
     }
 
     public String getTipo() {

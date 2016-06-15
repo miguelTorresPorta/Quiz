@@ -53,9 +53,6 @@ public class WebServiceHelper {
 
             listFG = getFillGaps(a.getNombre());
 
-            //listTF = getTrueFalse(a.getNombre());
-
-            //listMC = getMultipleChoice(a.getNombre());
 
             listTest.add(new Test(a.getNombre(), a.getDescripcion(), listFG, listTF, listMC));
         }
@@ -107,48 +104,6 @@ public class WebServiceHelper {
                     }
                 }
         );
-        // Realizar petición GET_BY_ID
-        /*VolleySingleton.getInstance(context).addToRequestQueue(
-                new JsonObjectRequest(
-                        Request.Method.GET,
-                        newURL,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                // Procesar respuesta Json
-                                try {
-                                    // Obtener atributo "mensaje"
-                                    String estado = response.getString("estado");
-
-                                    switch (estado) {
-                                        case "1": // EXITO
-                                            // Obtener array "Authors" Json
-                                            JSONArray mensaje = (JSONArray) response.get("authors");
-                                            for (int i = 0; i < mensaje.length(); i++){
-                                                JSONObject aut = mensaje.getJSONObject(i);
-
-                                                authors.add(new Author(aut.get("Nombre").toString(), aut.get("Descripcion").toString()));
-                                            }
-
-                                            break;
-                                        case "2": // FALLIDO
-                                            String mensaje2 = response.getString("mensaje");
-                                            break;
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                String s = "Error de conexión...";
-                                Log.d(TAG, "Error Volley: " + error.getMessage());
-                            }
-                        }
-                )
-        );*/
-
 
         return authors;
     }

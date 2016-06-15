@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/Users/migueltorresporta/Documents/andkey.jks')
+            keyAlias 'Quiz'
+            keyPassword 'industria'
+            storePassword 'industria'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "miguel.quiz"
         minSdkVersion 14
@@ -16,6 +23,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 
@@ -29,5 +37,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.1'
     compile 'com.mcxiaoke.volley:library:1.0.+'
     compile 'com.google.code.gson:gson:2.3.1'
-
 }
